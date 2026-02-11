@@ -1,57 +1,156 @@
-# Sample Hardhat 3 Beta Project (`node:test` and `viem`)
+# CivicLedger — Public Accountability Layer for Civic Infrastructure
 
-This project showcases a Hardhat 3 Beta project using the native Node.js test runner (`node:test`) and the `viem` library for Ethereum interactions.
+CivicLedger is a decentralized civic accountability platform designed to make public infrastructure issues transparent, verifiable, and immutable. Instead of relying on editable complaint portals, CivicLedger records every civic issue and action as a permanent, cryptographically verifiable event using blockchain and decentralized storage.
 
-To learn more about the Hardhat 3 Beta, please visit the [Getting Started guide](https://hardhat.org/docs/getting-started#getting-started-with-hardhat-3). To share your feedback, join our [Hardhat 3 Beta](https://hardhat.org/hardhat3-beta-telegram-group) Telegram group or [open an issue](https://github.com/NomicFoundation/hardhat/issues/new) in our GitHub issue tracker.
+This project was developed as part of a Web3 civic-tech initiative focusing on transparency, governance, and community participation.
 
-## Project Overview
+---
 
-This example project includes:
+## 🚀 Project Overview
 
-- A simple Hardhat configuration file.
-- Foundry-compatible Solidity unit tests.
-- TypeScript integration tests using [`node:test`](nodejs.org/api/test.html), the new Node.js native test runner, and [`viem`](https://viem.sh/).
-- Examples demonstrating how to connect to different types of networks, including locally simulating OP mainnet.
+Traditional civic reporting systems rely on centralized databases where records can be modified, deleted, or hidden. CivicLedger introduces an **append-only accountability model**:
 
-## Usage
+- Complaints become immutable public records
+- Status updates are stored as new events instead of overwriting history
+- Evidence cannot be silently removed
+- Community members can support issues through transparent donations
 
-### Running Tests
+The platform acts as a **public audit trail**, not just a complaint system.
 
-To run all the tests in the project, execute the following command:
+---
 
-```shell
-npx hardhat test
-```
+## 🧠 Core Concept
 
-You can also selectively run the Solidity or `node:test` tests:
+Instead of asking:
+> “What is the current status?”
 
-```shell
-npx hardhat test solidity
-npx hardhat test nodejs
-```
+CivicLedger answers:
+> “What actually happened over time?”
 
-### Make a deployment to Sepolia
+Each action is recorded as a verifiable event.
 
-This project includes an example Ignition module to deploy the contract. You can deploy this module to a locally simulated chain or to Sepolia.
+---
 
-To run the deployment to a local chain:
+## 🏗️ Architecture
 
-```shell
-npx hardhat ignition deploy ignition/modules/Counter.ts
-```
+### 1. Frontend
+- Built with React
+- MetaMask wallet integration
+- User submission panel and admin action panel
+- CID-based data rendering from IPFS
 
-To run the deployment to Sepolia, you need an account with funds to send the transaction. The provided Hardhat configuration includes a Configuration Variable called `SEPOLIA_PRIVATE_KEY`, which you can use to set the private key of the account you want to use.
+### 2. Smart Contract (Ethereum Sepolia)
+- Stores complaint CID references
+- Maintains immutable action history
+- Tracks issue creation and status updates
+- Supports donation-linked transparency
 
-You can set the `SEPOLIA_PRIVATE_KEY` variable using the `hardhat-keystore` plugin or by setting it as an environment variable.
+### 3. Decentralized Storage (IPFS via Pinata)
+- Complaint JSON metadata
+- Image evidence
+- Status update records
 
-To set the `SEPOLIA_PRIVATE_KEY` config variable using `hardhat-keystore`:
+### 4. Web3 Integration
+- ethers.js for blockchain interaction
+- MetaMask for identity and transaction signing
 
-```shell
-npx hardhat keystore set SEPOLIA_PRIVATE_KEY
-```
+---
 
-After setting the variable, you can run the deployment with the Sepolia network:
+## ⚙️ How It Works (Flow)
 
-```shell
-npx hardhat ignition deploy --network sepolia ignition/modules/Counter.ts
-```
+1. User submits an issue with image and details.
+2. Data is packaged into a JSON file.
+3. JSON + image are uploaded to IPFS → CID generated.
+4. CID is written to the blockchain smart contract.
+5. Any future update creates a **new CID** (no edits).
+6. Frontend fetches official issue history from blockchain → loads data from IPFS.
+
+---
+
+## 🔑 Key Features
+
+- Immutable issue records
+- Event-based status tracking
+- Wallet-based identity
+- Transparent community donation support
+- Decentralized evidence persistence
+- No centralized database dependency
+
+---
+
+## 🧪 Tech Stack
+
+- **Frontend:** React, JavaScript
+- **Blockchain:** Solidity, Ethereum Sepolia
+- **Web3 Libraries:** ethers.js
+- **Storage:** IPFS (Pinata)
+- **Wallet:** MetaMask
+- **Development Tools:** Remix IDE
+
+---
+
+## 📦 Smart Contract Summary
+
+The CivicIssues contract:
+
+- Creates new issues using CID references
+- Stores reporter wallet address and timestamps
+- Appends status updates as immutable entries
+- Enables verifiable issue history retrieval
+
+---
+
+## 🛡️ Design Principles
+
+- Append-only architecture (no silent edits)
+- Minimal on-chain storage (CID-only model)
+- Proof over trust
+- Transparency by design
+- Community-driven accountability
+
+---
+
+## 💡 Innovation Highlights
+
+- Converts civic issues into publicly auditable events
+- Eliminates hidden status modifications
+- Links funding directly to visible outcomes
+- Ensures evidence persistence through decentralized storage
+
+---
+
+## 📈 Future Improvements
+
+- Role-based authority permissions
+- On-chain donation smart contract module
+- AI-assisted image validation
+- Advanced analytics dashboard
+- Multi-network deployment
+
+---
+
+## 👥 Team
+
+Developed as a collaborative Web3 civic-tech project focused on governance innovation and transparent public infrastructure tracking.
+
+---
+
+## 📜 License
+
+This project is released for educational and research purposes.
+
+---
+
+## ✅ Project Status
+
+**Completed — End-to-end flow operational**
+
+- Frontend integrated with MetaMask ✔
+- IPFS uploads functional ✔
+- Smart contract deployed on Sepolia ✔
+- Immutable issue tracking implemented ✔
+- Status history append logic working ✔
+
+---
+
+> CivicLedger transforms civic reporting into a permanent, verifiable public record — where accountability is enforced by architecture, not authority.
